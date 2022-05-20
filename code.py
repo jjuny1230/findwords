@@ -7,7 +7,7 @@ a = data.split("\n")
 
 result = []
 
-word = "improve"
+word = "match"
 for y in range(len(a)):
     for x in range(len(a[0])):
         # a 가 있는 위치 찾기
@@ -52,4 +52,41 @@ for y in range(len(a)):
                 if check:
                     result.append([x, y])
 
+            # 오른쪽 위로 올라가는 대각선
+            check = True
+            if x + len(word) - 1 < len(a[0]) and  y - len(word) + 1 >= 0:
+                for b in range(len(word)):
+                    if a[y - b][x + b] != word[b]:
+                        check = False
+                        break
+                if check:
+                    result.append([x, y])
+
+            #왼쪽 위로 올라가는 대각선
+            if  x - len(word) + 1 >= 0 and  y - len(word) + 1 >= 0:
+                for b in range(len(word)):
+                    if a[y-b][x - b] != word[b]:
+                        check = False
+                        break
+                if check:
+                    result.append([x, y])
+                    
+            # 오른쪽 아래로 내려가는 대각선
+            check = True
+            if x + len(word) - 1 < len(a[0]) and y + len(word) - 1 < len(a):
+                for b in range(len(word)):
+                    if a[y + b][x + b] != word[b]:
+                        check = False
+                        break
+                if check:
+                    result.append([x, y])
+                    
+            #왼쪽 아래로 내려가는 대각선
+            if x - len(word) + 1 >= 0 and y + len(word) - 1 < len(a):
+                for b in range(len(word)):
+                    if a[y - b][x - b] != word[b]:
+                        check = False
+                        break
+                if check:
+                    result.append([x, y])
 print(result)
